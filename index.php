@@ -73,7 +73,7 @@ $show_complete_tasks = rand(0, 1);
                     <label class="checkbox">
 
                         <input class="checkbox__input visually-hidden show_completed" type="checkbox"
-                        <?php if ($show_complete_tasks == 1): ?> checked <?php endif ?>
+                            <?= ($show_complete_tasks ==1) ? 'checked' : ''; ?>
                         >
                         <!--насколько понимаю здесь мы внутри тега запрашиваем значение - будет ли стоять галка у "показать выполненые"-->
                         <span class="checkbox__text">Показывать выполненные</span>
@@ -107,7 +107,7 @@ $show_complete_tasks = rand(0, 1);
                         <td class="task__controls"></td>
                     </tr>
                     <?php endif ?>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице d-->
                 </table>
             </main>
         </div>
