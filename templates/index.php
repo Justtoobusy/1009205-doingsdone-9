@@ -50,7 +50,7 @@
                     <?php if ($task['is_done'] === False || $show_complete_tasks != 0 ){ ?>
 
                     <tr class="tasks__item task <?= ($task['is_done'] == True) ? 'task--completed' : ''; ?>
-                        <?= is_important($task)  ? 'task--important' : ''; ?>"
+                        <?= is_important($task['completion_date'])  ? 'task--important' : ''; ?>"
                     >
                         <td class="task__select">
                             <label class="checkbox task__checkbox">

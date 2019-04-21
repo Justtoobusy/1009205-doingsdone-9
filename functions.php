@@ -10,9 +10,9 @@ function task_count($tasks, $project)
     return $num;
 }
 
-function diff_hours($task)
+function diff_hours($date)
 {
-    $hours_left = floor((strtotime($task['completion_date']) - time()) / 3600);
+    $hours_left = floor((strtotime($date) - time()) / 3600);
     return $hours_left;
 }
 
