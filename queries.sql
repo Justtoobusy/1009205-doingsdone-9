@@ -7,15 +7,7 @@ INSERT INTO users
 SET email = 'pelena66@mail.ru', username = 'Mother', PASSWORD = 'qwerty' ;
 --закидываем проекты
 INSERT INTO categories
-SET title = 'Учеба';
-INSERT INTO categories
-SET title = 'Входящие';
-INSERT INTO categories
-SET title = 'Работа';
-INSERT INTO categories
-SET title = 'Домашние дела';
-INSERT INTO categories
-SET title = 'Авто';
+(title) VALUES ('Учеба','Входящие','Работа','Домашние дела','Авто');
 --добавляем задачи
 INSERT INTO tasks
 SET is_done = 0, title = 'Собеседование в IT компании', deadline = '2019-12-01', user_id ='1', category_id = '4';
