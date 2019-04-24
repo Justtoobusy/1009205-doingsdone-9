@@ -1,24 +1,14 @@
 --закидываем пользователей
-INSERT INTO users 
-SET email = 'harveyj@mail.ru', username = 'Harvey_Johnson', PASSWORD = 'harveyj';
-INSERT INTO users 
-SET email = 'alemu@mail.ru', username = 'Alemu', PASSWORD = 'alemus' ;
-INSERT INTO users 
-SET email = 'pelena66@mail.ru', username = 'Mother', PASSWORD = 'qwerty' ;
+INSERT INTO users (email,usernam,password)
+VALUES ('harveyj@mail.ru','Harvey_Johnson','harveyj'),('alemu@mail.ru','Alemu','alemus'),('pelena66@mail.ru','Mother','qwerty');
 --закидываем проекты
 INSERT INTO categories
 (title) VALUES ('Учеба'),('Входящие'),('Работа'),('Домашние дела'),('Авто');
 --добавляем задачи
-INSERT INTO tasks
-SET is_done = 0, title = 'Собеседование в IT компании', deadline = '2019-12-01', user_id ='1', category_id = '4';
-INSERT INTO tasks
-SET is_done = 0, title = 'Выполнить тестовое задание', deadline = '2019-12-25', user_id ='1', category_id = '4';
-INSERT INTO tasks
-SET is_done = 1, title = 'Сделать задание первого раздела', deadline = '2019-12-22', user_id ='1', category_id = '1';
-INSERT INTO tasks
-SET is_done = 0, title = 'Встреча с другом', deadline = '2019-04-20', user_id ='1', category_id = '3';
-INSERT INTO tasks
-SET is_done = 0, title = 'Купить корм для кота', deadline = NULL, user_id ='2', category_id = '5';
+INSERT INTO tasks (is_done,title,deadline,user_id,category_id)
+VALUES (0,'Собеседование в IT компании','2019-12-01','1','4'),(0,'Выполнить тестовое задание','2019-12-25','1','4'),
+(1,'Сделать задание первого раздела','2019-12-22','1','1'),(0,'Встреча с другом','2019-04-20','1','3'),
+(0,'Купить корм для кота',NULL,'2','5');
 --пометить задачу как выполненную
 UPDATE tasks SET is_done = 1
 WHERE id = '4';
