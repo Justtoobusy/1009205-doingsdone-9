@@ -33,3 +33,13 @@ function getDataAll($con, $sql, $data = [])
     }
     return $result;
 }
+
+function getDataOne($con, $sql, $data = [])
+{
+    $stmt = db_get_prepare_stmt($con, $sql, $data);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+
+   return mysqli_fetch_assoc($res);
+
+}

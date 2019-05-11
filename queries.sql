@@ -1,5 +1,5 @@
 --закидываем пользователей
-INSERT INTO users (email,usernam,password)
+INSERT INTO users (email,username,password)
 VALUES ('harveyj@mail.ru','Harvey_Johnson','harveyj'),('alemu@mail.ru','Alemu','alemus'),('pelena66@mail.ru','Mother','qwerty');
 --закидываем проекты
 INSERT INTO categories
