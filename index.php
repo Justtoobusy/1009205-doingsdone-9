@@ -11,18 +11,18 @@ if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
 }
 
-
-$sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id ';
-$param = [];
+$session_id = $_SESSION['user']['id'];
+$sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ?';
+$param = [$_SESSION['user']['id']];
 if ($category_id) {
-    $sql = "SELECT t.*,c.title as category_name,date_format(t.deadline,\"%d.%m.%Y\") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE c.id = ?";
-$param = [$category_id];
+    $sql = "SELECT t.*,c.title as category_name,date_format(t.deadline,\"%d.%m.%Y\") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE c.id = ? AND t.user_id = ?";
+    $param = [$category_id, $_SESSION['user']['id']];
 }
 $tasks = getDataAll($con, $sql, $param);
 if (empty($tasks)) {
     http_response_code(404);
 }
-$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks WHERE category_id = c.id ) AS task_count ,c.id, c.title FROM categories c  GROUP BY c.id', []);
+$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c  GROUP BY c.id ', [$_SESSION['user']['id']]);
 
 $index_content = include_template('index.php', [
     'projects' => $projects,
@@ -30,8 +30,12 @@ $index_content = include_template('index.php', [
     'category_id' => $category_id
 ]);
 
-print include_template('layout.php', [
-    'content' => $index_content,
-    'title' => 'Дела в порядке'
-]);
-
+if ($is_auth) {
+    print include_template('layout.php', [
+        'content' => $index_content,
+        'title' => 'Дела в порядке',
+        'is_auth' => $is_auth
+    ]);
+} else {
+    header("Location: /guest.php");
+}

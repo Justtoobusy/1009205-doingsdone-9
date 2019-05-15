@@ -30,11 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             move_uploaded_file($_FILES['file']['tmp_name'], $file_path . $file_name);
         }
         $task_deadline = $_POST['date'];
-        if ($_POST['date'] == ''){
+        if ($_POST['date'] == '') {
             $task_deadline = null;
         }
         $stmt = db_get_prepare_stmt($con, 'INSERT INTO tasks (dt_add,user_id,title,category_id,deadline,file_attachement)
-    VALUES (NOW(),1,?,?,?,?)', [
+    VALUES (NOW(),?,?,?,?,?)', [
+            $_SESSION['user']['id'],
             $_POST['name'],
             $_POST['project'],
             $task_deadline,
@@ -47,5 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 print include_template('add.php', [
     'projects' => $projects,
-    'errors' => $errors
+    'errors' => $errors,
+    'is_auth' => $is_auth
 ]);
