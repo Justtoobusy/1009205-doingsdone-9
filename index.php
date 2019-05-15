@@ -11,7 +11,6 @@ if (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
 }
 
-$session_id = $_SESSION['user']['id'];
 $sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ?';
 $param = [$_SESSION['user']['id']];
 if ($category_id) {

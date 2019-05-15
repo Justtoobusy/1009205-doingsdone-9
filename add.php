@@ -4,8 +4,8 @@ require 'functions.php';
 require 'data.php';
 require 'init.php';
 
-$sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id ';
-$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks WHERE category_id = c.id ) AS task_count ,c.id, c.title FROM categories c  GROUP BY c.id', []);
+//$sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ?';
+$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c  GROUP BY c.id ', [$_SESSION['user']['id']]);
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
