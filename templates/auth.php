@@ -32,7 +32,7 @@
                         $value = isset($_POST['email']) ? $_POST['email'] : ""; ?>
                         <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-                        <input class="form__input <?= $classname; ?>" type="text" name="email" id="email"
+                        <input class="form__input <?= $classname; ?>" type="email" name="email" id="email"
                                value="<?= $value; ?>" placeholder="Введите e-mail">
                         <?php if (isset($errors['email'])) { ?>
                             <p class="form__message"><?= $errors['email']; ?></p>

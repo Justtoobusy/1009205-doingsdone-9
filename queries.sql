@@ -3,7 +3,7 @@ INSERT INTO users (email,username,password)
 VALUES ('harveyj@mail.ru','Harvey_Johnson','harveyj'),('alemu@mail.ru','Alemu','alemus'),('pelena66@mail.ru','Mother','qwerty');
 --закидываем проекты
 INSERT INTO categories
-(title) VALUES ('Учеба'),('Входящие'),('Работа'),('Домашние дела'),('Авто');
+(title,user_id) VALUES ('Учеба',11),('Входящие',11),('Работа',11),('Домашние дела',11),('Авто',11);
 --добавляем задачи
 INSERT INTO tasks (is_done,title,deadline,user_id,category_id)
 VALUES (0,'Собеседование в IT компании','2019-12-01','1','4'),(0,'Выполнить тестовое задание','2019-12-25','1','4'),

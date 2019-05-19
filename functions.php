@@ -40,6 +40,28 @@ function getDataOne($con, $sql, $data = [])
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
 
-   return mysqli_fetch_assoc($res);
+    return mysqli_fetch_assoc($res);
 
+}
+
+
+function convertFilterToMysql(string $filter = null): string
+{
+    switch ($filter) {
+        case 'today':{
+            $date = date('Y-m-d',time());
+            return "AND t.deadline ='{$date}'";
+        }
+        case 'tomorrow':{
+            $date = date('Y-m-d',time()+86400);
+            return "AND t.deadline ='{$date}'";
+        }
+        case 'overdue':{
+            $date = date('Y-m-d',time());
+            return "AND t.deadline < '{$date}'";
+        }
+        default:{
+            return '';
+        }
+    }
 }

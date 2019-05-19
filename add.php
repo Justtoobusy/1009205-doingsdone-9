@@ -4,14 +4,13 @@ require 'functions.php';
 require 'data.php';
 require 'init.php';
 
-//$sql = 'SELECT t.*,c.title as category_name,date_format(t.deadline,"%d.%m.%Y") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ?';
-$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c  GROUP BY c.id ', [$_SESSION['user']['id']]);
+$projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'],$_SESSION['user']['id']]);
 
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $required_fields = ['name', 'project'];
     foreach ($required_fields as $field) {
-        if (!isset($_POST[$field])) {
+        if (!isset($_POST[$field]) || !$_POST[$field]) {
             $errors[$field] = 'Заполните обязательное поле';
         }
     }
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['project'] = 'Выберите существующий проект';
     }
     if (!empty($_POST['date']) && (!is_date_valid($_POST['date']) || strtotime($_POST['date']) < time())) {
-        $errors['Deadline'] = 'Выберите верную дату';
+        $errors['deadline'] = 'Выберите верную дату';
     }
     if (count($errors) == 0) {
         $file_name = null;

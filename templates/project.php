@@ -6,7 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/flatpickr.min.css">
 </head>
 
 <body>
@@ -19,17 +18,17 @@
                 <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
             </a>
             <?php if ($is_auth) { ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus" href="add.php">Добавить задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus" href="add.php">Добавить задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__data">
-                        <p><?= $_SESSION['user']['username']; ?></p>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                            <p><?= $_SESSION['user']['username']; ?></p>
 
-                        <a href="/logout.php">Выйти</a>
+                            <a href="/logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php } else { ?>
                 <div class="main-header__side">
                     <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
@@ -48,84 +47,34 @@
                                 <a class="main-navigation__list-item-link"
                                    href="#"><?= htmlspecialchars($project['title']) ?></a>
                                 <span class="main-navigation__list-item-count">
-                                <?php echo $project['task_count']; ?>
+                                 <?php echo $project['task_count']; ?>
                             </span>
                             </li>
                         <?php } ?>
                     </ul>
                 </nav>
 
-                <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить
+                <a class="button button--transparent button--plus content__side-button" href="project.php">Добавить
                     проект</a>
             </section>
 
             <main class="content__main">
-                <h2 class="content__main-heading">Добавление задачи</h2>
+                <h2 class="content__main-heading">Добавление проекта</h2>
 
-                <form class="form" action="add.php" method="post" autocomplete="off" enctype="multipart/form-data">
+                <form class="form" action="project.php" method="post" autocomplete="off">
                     <div class="form__row">
-                        <?php $classname_name = isset($errors['name']) ? 'form__input--error' : '';
-                        $value_name = isset($_POST['name']) ? $_POST['name'] : '';
+                        <?php $classname = isset($errors['name']) ? 'form__input--error' : '';
+                        $value = isset($_POST['name']) ? $_POST['name'] : '';
                         ?>
-                        <label class="form__label" for="name">Название <sup>*</sup></label>
+                        <label class="form__label" for="project_name">Название <sup>*</sup></label>
 
-                        <input class="form__input <?= $classname_name; ?>" type="text" name="name" id="name"
-                               value="<?= $value_name; ?>"
-                               placeholder="Введите название">
+                        <input class="form__input <?= $classname; ?>" type="text" name="name" id="project_name"
+                               value="<?= $value; ?>"
+                               placeholder="Введите название проекта">
                         <?php if (isset($errors['name'])) { ?>
                             <p class="form__message"><?= $errors['name']; ?></p>
                         <?php } ?>
                     </div>
-
-                    <div class="form__row">
-                        <?php $classname_project = isset($errors['project']) ? 'form__input--error' : '';
-                        ?>
-                        <label class="form__label" for="project">Проект <sup>*</sup></label>
-
-                        <select class="form__input form__input--select <?= $classname_project; ?>" name="project" id="project">
-                            <?php foreach ($projects as $project) { ?>
-                                <option value="<?= $project['id']; ?>">
-                                    <?php echo $project['title']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-
-                    <div class="form__row">
-                        <?php $classname_date = isset($errors['deadline']) ? 'form__input--error' : '';
-                        $value_date = isset($_POST['date']) ? $_POST['date'] : '';
-                        ?>
-                        <label class="form__label" for="date">Дата выполнения</label>
-
-                        <input class="form__input form__input--date <?= $classname_date; ?>" type="text" name="date"
-                               id="date" value="<?= $value_date; ?>"
-                               placeholder="Введите дату в формате ГГГГ-ММ-ДД">
-                        <?php if (isset($errors['deadline'])) { ?>
-                            <p class="form__message"><?= $errors['deadline']; ?></p>
-                        <?php } ?>
-                    </div>
-
-                    <div class="form__row">
-                        <label class="form__label" for="file">Файл</label>
-
-                        <div class="form__input-file">
-                            <input class="visually-hidden" type="file" name="file" id="file" value="">
-
-                            <label class="button button--transparent" for="file">
-                                <span>Выберите файл</span>
-                            </label>
-                        </div>
-                    </div>
-                    <?php if (!empty($errors)): ?>
-                        <div class="p.form__message">
-                            <p>Пожалуйста, исправьте следующие ошибки:</p>
-                            <ul>
-                                <?php foreach ($errors as $error): ?>
-                                    <li><?= $error;?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
 
                     <div class="form__row form__row--controls">
                         <input class="button" type="submit" name="" value="Добавить">
@@ -194,7 +143,5 @@
         </div>
     </div>
 </footer>
-<script src="../flatpickr.js"></script>
-<script src="../script.js"></script>
 </body>
 </html>
