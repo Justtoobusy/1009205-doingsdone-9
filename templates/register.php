@@ -32,7 +32,9 @@
 
             <main class="content__main">
                 <h2 class="content__main-heading">Регистрация аккаунта</h2>
-
+                <?php if (!empty($errors)) { ?>
+                    <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
+                <?php } ?>
                 <form class="form" action="register.php" method="post" autocomplete="off">
                     <div class="form__row">
                         <?php $error_email = isset($errors['email']) ? 'form__input--error' : ''; ?>
@@ -69,9 +71,6 @@
                     </div>
 
                     <div class="form__row form__row--controls">
-                        <?php if (!empty($errors)) { ?>
-                            <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
-                        <?php } ?>
                         <input class="button" type="submit" name="" value="Зарегистрироваться">
                     </div>
                 </form>

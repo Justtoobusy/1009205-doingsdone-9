@@ -19,17 +19,17 @@
                 <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
             </a>
             <?php if ($is_auth) { ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus" href="add.php">Добавить задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus" href="add.php">Добавить задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__data">
-                        <p><?= $_SESSION['user']['username']; ?></p>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__data">
+                            <p><?= $_SESSION['user']['username']; ?></p>
 
-                        <a href="/logout.php">Выйти</a>
+                            <a href="/logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php } else { ?>
                 <div class="main-header__side">
                     <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
@@ -82,7 +82,8 @@
                         ?>
                         <label class="form__label" for="project">Проект <sup>*</sup></label>
 
-                        <select class="form__input form__input--select <?= $classname_project; ?>" name="project" id="project">
+                        <select class="form__input form__input--select <?= $classname_project; ?>" name="project"
+                                id="project">
                             <?php foreach ($projects as $project) { ?>
                                 <option value="<?= $project['id']; ?>">
                                     <?php echo $project['title']; ?>
@@ -121,7 +122,7 @@
                             <p>Пожалуйста, исправьте следующие ошибки:</p>
                             <ul>
                                 <?php foreach ($errors as $error): ?>
-                                    <li><?= $error;?></li>
+                                    <li><?= $error; ?></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

@@ -27,7 +27,7 @@ foreach ($users as $user) {
             $today_tasks = array_values($today_tasks);
         }
         $phrase = '';
-        if (count($today_tasks) > 1){
+        if (count($today_tasks) > 1) {
             $phrase = ". У вас запланированы задачи: ";
         } else {
             $phrase = ". У вас запланирована задача: ";

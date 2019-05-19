@@ -26,7 +26,8 @@
     <form class="search-form" action="index.php" method="get" autocomplete="off">
         <?php $search = isset($_GET['task_search']) ? $_GET['task_search'] : '';
         ?>
-        <input class="search-form__input" type="text" name="task_search" value="<?=$search;?>" placeholder="Поиск по задачам">
+        <input class="search-form__input" type="text" name="task_search" value="<?= $search; ?>"
+               placeholder="Поиск по задачам">
 
         <input class="search-form__submit" type="submit" name="" value="Искать">
     </form>

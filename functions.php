@@ -48,20 +48,24 @@ function getDataOne($con, $sql, $data = [])
 function convertFilterToMysql(string $filter = null): string
 {
     switch ($filter) {
-        case 'today':{
-            $date = date('Y-m-d',time());
-            return "AND t.deadline ='{$date}'";
-        }
-        case 'tomorrow':{
-            $date = date('Y-m-d',time()+86400);
-            return "AND t.deadline ='{$date}'";
-        }
-        case 'overdue':{
-            $date = date('Y-m-d',time());
-            return "AND t.deadline < '{$date}'";
-        }
-        default:{
-            return '';
-        }
+        case 'today':
+            {
+                $date = date('Y-m-d', time());
+                return "AND t.deadline ='{$date}'";
+            }
+        case 'tomorrow':
+            {
+                $date = date('Y-m-d', time() + 86400);
+                return "AND t.deadline ='{$date}'";
+            }
+        case 'overdue':
+            {
+                $date = date('Y-m-d', time());
+                return "AND t.deadline < '{$date}'";
+            }
+        default:
+            {
+                return '';
+            }
     }
 }
