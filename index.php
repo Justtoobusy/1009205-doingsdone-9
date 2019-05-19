@@ -57,13 +57,11 @@ $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.categ
 $index_content = include_template('index.php', [
     'projects' => $projects,
     'tasks' => $tasks,
-    'category_id' => $category_id,
-    'show_completed_tasks' => $show_completed_tasks
+    'category_id' => $category_id
 ]);
 if ($is_auth) {
     print include_template('layout.php', [
         'content' => $index_content,
-        'title' => 'Дела в порядке',
         'is_auth' => $is_auth
     ]);
 } else {
