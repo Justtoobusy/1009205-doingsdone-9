@@ -25,3 +25,6 @@ file_attachement CHAR(255),
 deadline DATETIME,
 user_id INT,
 category_id INT);
+
+CREATE FULLTEXT INDEX task_search
+ON tasks (title)

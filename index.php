@@ -13,7 +13,7 @@ $filter = null;
 if (isset($_GET['filter'])) {
     $filter = $_GET['filter'];
 }
-$date_filter_sql =convertFilterToMysql($filter);
+$date_filter_sql = convertFilterToMysql($filter);
 $show_completed_tasks = null;
 if (isset($_GET['show_completed'])) {
     $show_completed_tasks = $_GET['show_completed'];
@@ -26,10 +26,15 @@ if ($category_id) {
     $param[] = $category_id;
     $category_id_filter_sql = 'AND c.id = ?';
 }
-
-
-$sql = "SELECT t.*,c.title as category_name,date_format(t.deadline,\"%d.%m.%Y\") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? {$date_filter_sql} {$category_id_filter_sql} ORDER BY t.deadline ASC";
-$tasks = getDataAll($con, $sql, $param);
+$task_search_sql = '';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $search_prepared = trim($_GET['task_search']);
+    if (!empty($search_prepared)) {
+        $task_search_sql = "AND MATCH (t.title) AGAINST ('{$search_prepared}')";
+    }
+}
+$sql = "SELECT t.*,c.title as category_name,date_format(t.deadline,\"%d.%m.%Y\") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? {$date_filter_sql} {$category_id_filter_sql} {$task_search_sql} ORDER BY t.deadline ASC";
+$tasks = getDataAll($con,$sql,$param);
 if (empty($tasks)) {
     http_response_code(404);
 }
@@ -49,7 +54,6 @@ if (isset($_GET['check'])) {
 }
 
 $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'], $_SESSION['user']['id']]);
-
 $index_content = include_template('index.php', [
     'projects' => $projects,
     'tasks' => $tasks,

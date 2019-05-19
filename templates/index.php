@@ -23,18 +23,26 @@
 <main class="content__main">
     <h2 class="content__main-heading">Список задач</h2>
 
-    <form class="search-form" action="index.php" method="post" autocomplete="off">
-        <input class="search-form__input" type="text" name="" value="" placeholder="Поиск по задачам">
+    <form class="search-form" action="index.php" method="get" autocomplete="off">
+        <?php $search = isset($_GET['task_search']) ? $_GET['task_search'] : '';
+        ?>
+        <input class="search-form__input" type="text" name="task_search" value="<?=$search;?>" placeholder="Поиск по задачам">
 
         <input class="search-form__submit" type="submit" name="" value="Искать">
     </form>
 
     <div class="tasks-controls">
         <nav class="tasks-switch">
-            <a href="/" class="tasks-switch__item <?= (!isset($_GET['filter'])) ? 'tasks-switch__item--active' : ''; ?>">Все задачи</a>
-            <a href="/?filter=today" class="tasks-switch__item <?= ($_GET['filter'] == 'today') ? 'tasks-switch__item--active' : ''; ?>">Повестка дня</a>
-            <a href="/?filter=tomorrow" class="tasks-switch__item <?= ($_GET['filter'] == 'tomorrow') ? 'tasks-switch__item--active' : ''; ?>">Завтра</a>
-            <a href="/?filter=overdue" class="tasks-switch__item <?= ($_GET['filter'] == 'overdue') ? 'tasks-switch__item--active' : ''; ?>">Просроченные</a>
+            <a href="/"
+               class="tasks-switch__item <?= (!isset($_GET['filter'])) ? 'tasks-switch__item--active' : ''; ?>">Все
+                задачи</a>
+            <a href="/?filter=today"
+               class="tasks-switch__item <?= ($_GET['filter'] == 'today') ? 'tasks-switch__item--active' : ''; ?>">Повестка
+                дня</a>
+            <a href="/?filter=tomorrow"
+               class="tasks-switch__item <?= ($_GET['filter'] == 'tomorrow') ? 'tasks-switch__item--active' : ''; ?>">Завтра</a>
+            <a href="/?filter=overdue"
+               class="tasks-switch__item <?= ($_GET['filter'] == 'overdue') ? 'tasks-switch__item--active' : ''; ?>">Просроченные</a>
         </nav>
         <label class="checkbox">
             <input
@@ -70,6 +78,11 @@
                     <td class="task__date"><?= htmlspecialchars($task['deadline']); ?> </td>
                 </tr>
             <?php } ?>
+        <?php } ?>
+        <?php if (empty($tasks) && !empty($_GET['task_search'])) { ?>
+            <tr>
+                <a>Ничего не найдено по вашему запросу</a>
+            </tr>
         <?php } ?>
     </table>
 </main>
