@@ -15,9 +15,9 @@ if (isset($_GET['filter'])) {
     $filter = $_GET['filter'];
 }
 $date_filter_sql = convertFilterToMysql($filter);
-$show_completed_tasks = null;
+
 if (isset($_GET['show_completed'])) {
-    $show_completed_tasks = $_GET['show_completed'];
+    $_SESSION['show_completed_tasks'] = $_GET['show_completed'];
 }
 $category_id_filter_sql = '';
 $param = [

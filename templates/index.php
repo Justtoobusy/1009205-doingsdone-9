@@ -46,7 +46,7 @@
         </nav>
         <label class="checkbox">
             <input
-                class="checkbox__input visually-hidden show_completed" <?= ($show_completed_tasks == 1) ? 'checked' : ''; ?>
+                class="checkbox__input visually-hidden show_completed" <?= ($_SESSION['show_completed_tasks'] == 1) ? 'checked' : ''; ?>
                 type="checkbox"
             >
             <span class="checkbox__text ">Показывать выполненные</span>
@@ -55,7 +55,7 @@
 
     <table class="tasks">
         <?php foreach ($tasks as $task) { ?>
-            <?php if ($task['is_done'] === 0 || $show_completed_tasks == 1) { ?>
+            <?php if ($task['is_done'] === 0 || $_SESSION['show_completed_tasks'] == 1) { ?>
 
                 <tr class="tasks__item task <?= ($task['is_done'] == True) ? 'task--completed' : ''; ?>
                         <?= is_important($task['deadline']) ? 'task--important' : ''; ?>"
