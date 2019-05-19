@@ -3,6 +3,7 @@ require 'helpers.php';
 require 'functions.php';
 require 'data.php';
 require 'init.php';
+require_once 'vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];

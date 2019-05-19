@@ -3,6 +3,7 @@ require 'helpers.php';
 require 'functions.php';
 require 'data.php';
 require 'init.php';
+require_once 'vendor/autoload.php';
 
 $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'],$_SESSION['user']['id']]);
 

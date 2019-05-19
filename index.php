@@ -3,6 +3,7 @@ require 'helpers.php';
 require 'functions.php';
 require 'data.php';
 require 'init.php';
+require_once 'vendor/autoload.php';
 
 $category_id = null;
 if (isset($_GET['category_id'])) {
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 $sql = "SELECT t.*,c.title as category_name,date_format(t.deadline,\"%d.%m.%Y\") as deadline FROM tasks t LEFT JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? {$date_filter_sql} {$category_id_filter_sql} {$task_search_sql} ORDER BY t.deadline ASC";
-$tasks = getDataAll($con,$sql,$param);
+$tasks = getDataAll($con, $sql, $param);
 if (empty($tasks)) {
     http_response_code(404);
 }
@@ -52,7 +53,6 @@ if (isset($_GET['check'])) {
         }
     }
 }
-
 $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'], $_SESSION['user']['id']]);
 $index_content = include_template('index.php', [
     'projects' => $projects,
