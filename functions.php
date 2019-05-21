@@ -49,23 +49,29 @@ function convertFilterToMysql(string $filter = null): string
 {
     switch ($filter) {
         case 'today':
-            {
-                $date = date('Y-m-d', time());
-                return "AND t.deadline ='{$date}'";
-            }
+            $date = date('Y-m-d', time());
+            $str = "AND t.deadline ='{$date}'";
+            break;
         case 'tomorrow':
-            {
-                $date = date('Y-m-d', time() + 86400);
-                return "AND t.deadline ='{$date}'";
-            }
+            $date = date('Y-m-d', time() + 86400);
+            $str = "AND t.deadline ='{$date}'";
+            break;
         case 'overdue':
-            {
-                $date = date('Y-m-d', time());
-                return "AND t.deadline < '{$date}'";
-            }
+            $date = date('Y-m-d', time());
+            $str = "AND t.deadline < '{$date}'";
+            break;
         default:
-            {
-                return '';
-            }
+            $str = '';
     }
+    return $str;
+}
+
+function isAuthUser($is_auth)
+{
+    if (!$is_auth) {
+        http_response_code(403);
+        print include_template('guest.php');
+        return false;
+    }
+    return true;
 }

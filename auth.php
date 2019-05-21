@@ -1,10 +1,13 @@
 <?php
 require 'helpers.php';
 require 'functions.php';
-require 'data.php';
 require 'init.php';
 require_once 'vendor/autoload.php';
 
+$content = include_template('auth.php', []);
+if ($is_auth){
+    header("Location: /index.php");
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];
     $required_fields = ['email', 'password'];
@@ -36,17 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         header("Location: /index.php");
     }
-} else {
-    if (isset($_SESSION['user'])) {
-        sleep(5);
-        header("Location: /index.php");
-    } else {
-        $content = include_template('auth.php', []);
-    }
 }
 $layout_content = include_template('layout.php', [
     'content' => $content,
-    'title' => 'Дела в порядке'
+    'title' => 'Дела в порядке',
+    'is_auth' => $is_auth
 ]);
 
 print($layout_content);
