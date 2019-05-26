@@ -35,7 +35,7 @@
                         <input class="form__input <?= $classname; ?>" type="email" name="email" id="email"
                                value="<?= $value; ?>" placeholder="Введите e-mail">
                         <?php if (isset($errors['email'])) { ?>
-                            <p class="form__message"><?= $errors['email']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['email']); ?></p>
                         <?php } ?>
                     </div>
 
@@ -47,7 +47,7 @@
                                value=""
                                placeholder="Введите пароль">
                         <?php if (isset($errors['password'])) { ?>
-                            <p class="form__message"><?= $errors['password']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['password']); ?></p>
                         <?php } ?>
                     </div>
 

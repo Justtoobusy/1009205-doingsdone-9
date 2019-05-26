@@ -7,7 +7,7 @@
                 <li class="main-navigation__list-item <?= $project['id'] == $category_id ? 'main-navigation__list-item--active' : ''; ?>
 ">
                     <a class="main-navigation__list-item-link"
-                       href="?category_id=<?= $project['id']; ?>"><?= htmlspecialchars($project['title']) ?> </a>
+                       href="?category_id=<?= htmlspecialchars($project['id']); ?>"><?= htmlspecialchars($project['title']) ?> </a>
                     <span class="main-navigation__list-item-count">
                                 <?php echo $project['task_count']; ?>
                             </span>
@@ -64,7 +64,7 @@
                     <td class="task__select">
                         <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
-                                   value="<?= htmlspecialchars($task['id']) ?>" <?= ($task['is_done']) ? 'checked' : ''; ?>>
+                                   value="<?= htmlspecialchars($task['id'])?>" <?= ($task['is_done']) ? 'checked' : ''; ?>>
                             <span class="checkbox__text"><?= htmlspecialchars($task['title']); ?></span>
                         </label>
                     </td>

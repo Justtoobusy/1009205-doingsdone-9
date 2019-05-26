@@ -43,7 +43,7 @@
                         <input class="form__input <?= $error_email ?>" type="text" name="email" id="email" value=""
                                placeholder="Введите e-mail">
                         <?php if (isset($errors['email'])) { ?>
-                            <p class="form__message"><?= $errors['email']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['email']); ?></p>
                         <?php } ?>
                     </div>
 
@@ -55,7 +55,7 @@
                                value=""
                                placeholder="Введите пароль">
                         <?php if (isset($errors['password'])) { ?>
-                            <p class="form__message"><?= $errors['password']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['password']); ?></p>
                         <?php } ?>
                     </div>
 
@@ -66,7 +66,7 @@
                         <input class="form__input <?= $error_name ?>" type="text" name="name" id="name" value=""
                                placeholder="Введите логин">
                         <?php if (isset($errors['name'])) { ?>
-                            <p class="form__message"><?= $errors['name']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['name']); ?></p>
                         <?php } ?>
                     </div>
 

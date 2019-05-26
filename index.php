@@ -4,11 +4,7 @@ require 'functions.php';
 require 'init.php';
 require_once 'vendor/autoload.php';
 
-
-if (!$is_auth) {
-    print include_template('guest.php');
-    exit;
-}
+isAuthUser($is_auth);
 
 $category_id = null;
 if (isset($_GET['category_id'])) {

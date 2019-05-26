@@ -55,7 +55,7 @@
                     </ul>
                 </nav>
 
-                <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить
+                <a class="button button--transparent button--plus content__side-button" href="project.php">Добавить
                     проект</a>
             </section>
 
@@ -73,7 +73,7 @@
                                value="<?= $value_name; ?>"
                                placeholder="Введите название">
                         <?php if (isset($errors['name'])) { ?>
-                            <p class="form__message"><?= $errors['name']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['name']); ?></p>
                         <?php } ?>
                     </div>
 
@@ -102,7 +102,7 @@
                                id="date" value="<?= $value_date; ?>"
                                placeholder="Введите дату в формате ГГГГ-ММ-ДД">
                         <?php if (isset($errors['deadline'])) { ?>
-                            <p class="form__message"><?= $errors['deadline']; ?></p>
+                            <p class="form__message"><?= htmlspecialchars($errors['deadline']); ?></p>
                         <?php } ?>
                     </div>
 
@@ -122,7 +122,7 @@
                             <p>Пожалуйста, исправьте следующие ошибки:</p>
                             <ul>
                                 <?php foreach ($errors as $error): ?>
-                                    <li><?= $error; ?></li>
+                                    <li><?= htmlspecialchars($error); ?></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
