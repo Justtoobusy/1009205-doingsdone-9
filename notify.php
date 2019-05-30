@@ -1,7 +1,6 @@
 <?php
 require 'helpers.php';
 require 'functions.php';
-require 'data.php';
 require 'init.php';
 require_once 'vendor/autoload.php';
 

@@ -47,7 +47,7 @@
                                 <a class="main-navigation__list-item-link"
                                    href="#"><?= htmlspecialchars($project['title']) ?></a>
                                 <span class="main-navigation__list-item-count">
-                                 <?php echo $project['task_count']; ?>
+                                 <?php echo htmlspecialchars($project['task_count']); ?>
                             </span>
                             </li>
                         <?php } ?>

@@ -8,7 +8,7 @@ $content = include_template('auth.php', []);
 if ($is_auth){
     header("Location: /index.php");
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'],$_POST['password'])) {
     $errors = [];
     $required_fields = ['email', 'password'];
     foreach ($required_fields as $field) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     if (!count($errors) && $user) {
-        if (password_verify($_POST['password'], $user['password'])) {
+        if (isset($_POST['password']) && password_verify($_POST['password'], $user['password'])) {
             $_SESSION['user'] = $user;
         } else {
             $errors['password'] = 'Неверный пароль';

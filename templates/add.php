@@ -48,7 +48,7 @@
                                 <a class="main-navigation__list-item-link"
                                    href="#"><?= htmlspecialchars($project['title']) ?></a>
                                 <span class="main-navigation__list-item-count">
-                                <?php echo $project['task_count']; ?>
+                                <?php echo htmlspecialchars($project['task_count']); ?>
                             </span>
                             </li>
                         <?php } ?>
@@ -86,7 +86,7 @@
                                 id="project">
                             <?php foreach ($projects as $project) { ?>
                                 <option value="<?= $project['id']; ?>">
-                                    <?php echo $project['title']; ?>
+                                    <?php echo htmlspecialchars($project['title']); ?>
                                 </option>
                             <?php } ?>
                         </select>
