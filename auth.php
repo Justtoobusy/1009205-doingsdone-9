@@ -5,10 +5,10 @@ require 'init.php';
 require_once 'vendor/autoload.php';
 
 $content = include_template('auth.php', []);
-if ($is_auth){
+if ($is_auth) {
     header("Location: /index.php");
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'],$_POST['password'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'], $_POST['password'])) {
     $errors = [];
     $required_fields = ['email', 'password'];
     foreach ($required_fields as $field) {
