@@ -9,7 +9,7 @@ isAuthUser($is_auth);
 $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'], $_SESSION['user']['id']]);
 
 $errors = [];
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'])) {
     if (empty($_POST['name'])) {
         $errors['name'] = 'Заполните обязательное поле';
     }

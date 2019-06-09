@@ -5,12 +5,10 @@ require 'init.php';
 require_once 'vendor/autoload.php';
 
 isAuthUser($is_auth);
-
-
 $projects = getDataAll($con, 'SELECT (SELECT COUNT(*) FROM tasks t WHERE t.category_id = c.id AND t.user_id = ?) AS task_count , c.id, c.title FROM categories c WHERE c.user_id = ?  GROUP BY c.id ', [$_SESSION['user']['id'], $_SESSION['user']['id']]);
 
 $errors = [];
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'],$_POST['project'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'],$_POST['project'])) {
     $required_fields = ['name', 'project'];
     foreach ($required_fields as $field) {
         if (!isset($_POST[$field]) || !$_POST[$field]) {

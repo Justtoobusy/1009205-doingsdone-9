@@ -7,7 +7,7 @@ require_once 'vendor/autoload.php';
 
 $errors = [];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['name'],$_POST['email'],$_POST['password']) ) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'],$_POST['email'],$_POST['password']) ) {
     $required_fields = ['email', 'password', 'name'];
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {

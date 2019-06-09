@@ -4,7 +4,7 @@
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php foreach ($projects as $project) { ?>
-                <li class="main-navigation__list-item <?= $project['id'] == $category_id ? 'main-navigation__list-item--active' : ''; ?>
+                <li class="main-navigation__list-item <?=$project['id'] === (int)$category_id ? 'main-navigation__list-item--active' : ''; ?>
 ">
                     <a class="main-navigation__list-item-link"
                        href="?category_id=<?= htmlspecialchars($project['id']); ?>"><?= htmlspecialchars($project['title']) ?> </a>
