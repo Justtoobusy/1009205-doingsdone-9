@@ -1,0 +1,12 @@
+{
+    "name": "alemu/1009205-doingsdone-9",
+    "authors": [
+        {
+            "name": "Justtoobusy",
+            "email": "alemu@mail.ru"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
